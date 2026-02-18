@@ -16,7 +16,7 @@ const Home = () => {
     }
     return (
         <View style={styles.counterContainer}>
-            <Text style={styles.counterTitle}>Counter App</Text>
+            <Text style={styles.counterTitle}>Counter Application</Text>
             <CounterCard count={count} />
             <View style={styles.counterBtnContainer}>
                 <CounterButton title="+"
