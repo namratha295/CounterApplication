@@ -3,13 +3,21 @@ import React, { useState } from 'react'
 import { Dimensions } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 
-const CounterCard = ({ count }: any) => {
+const CounterCard = ({ count, isDarkModeEnabled }: any) => {
     const { width } = Dimensions.get('window');
     const { height } = Dimensions.get('window');
-    const gradientColors = ['#ffd268', '#f8eb59', '#d7fb57'];
+    const gradientColors = isDarkModeEnabled ? ['#c5c6f2', '#7a70e3', '#5e4d89'] : ['#ffd268', '#f8eb59', '#d7fb57'];
+    const lightTheme = {
+        gradientColors: ['#ffd268', '#f8eb59', '#d7fb57'],
+        text: '#000'
+    }
+    const darkTheme = {
+        gradientColors: ['#c5c6f2', '#7a70e3', '#5e4d89'],
+        text: '#fff'
+    }
     return (
         <LinearGradient colors={gradientColors} style={{ width: width * 0.85, height: height * 0.45, ...styles.card }}>
-            <Text style={{ fontSize: 100 }}>{count}</Text>
+            <Text style={{ fontSize: 100, color: isDarkModeEnabled ? darkTheme.text : lightTheme.text }}>{count}</Text>
         </LinearGradient>
     )
 }

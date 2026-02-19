@@ -46,4 +46,5 @@ src/
 
 ## 📱 App Preview
 
-![Counter App Screenshot](./src/assets/counterapp.png)
+![Counter App Screenshot Light Theme](./src/assets/lightTheme.png)
+![Counter App Screenshot Dark Theme](./src/assets/darkTheme.png)
