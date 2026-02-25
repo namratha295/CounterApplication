@@ -1,12 +1,13 @@
 import { StyleSheet, Switch, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CounterCard from '../components/CounterCard'
 import CounterButton from '../components/CounterButton'
+import { getItem, setItem } from '../utils/storage'
 
 const Home = () => {
     const [count, setCount] = useState(0);
     const [isDarkModeEnabled, setIsDarkModeEnabled] = useState(false);
-    const toggleSwitch = () => setIsDarkModeEnabled(!isDarkModeEnabled);
+    
     const handleIncrement = () => {
         setCount(count + 1);
     }
@@ -16,6 +17,24 @@ const Home = () => {
     const handleReset = () => {
         setCount(0);
     }
+
+    const toggleTheme = async () => {
+        const newTheme = !isDarkModeEnabled;
+        setIsDarkModeEnabled(newTheme);
+
+        await setItem("theme", newTheme.toString());
+    }
+
+    useEffect(() => {
+        const loadTheme = async () => {
+            const storedTheme = await getItem("theme");
+            if (storedTheme !== null) {
+                setIsDarkModeEnabled(storedTheme === "true");
+            }
+        }
+        loadTheme();
+    }, []);
+    
     return (
         <View style={[styles.counterContainer, { backgroundColor: isDarkModeEnabled ? '#646464' : '#fff' }]}>
             <Text style={[styles.counterTitle, { color: isDarkModeEnabled ? '#fff' : '#000' }]}>Counter Application</Text>
@@ -26,7 +45,7 @@ const Home = () => {
                 <Switch
                     trackColor={{ false: '#767577', true: '#81b0ff' }}
                     thumbColor={isDarkModeEnabled ? '#f5dd4b' : '#f4f3f4'}
-                    onValueChange={toggleSwitch}
+                    onValueChange={toggleTheme}
                     value={isDarkModeEnabled}
                 />
             </View>
