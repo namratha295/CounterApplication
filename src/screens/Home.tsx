@@ -7,7 +7,7 @@ import { getItem, setItem } from '../utils/storage'
 const Home = () => {
     const [count, setCount] = useState(0);
     const [isDarkModeEnabled, setIsDarkModeEnabled] = useState(false);
-    
+
     const handleIncrement = () => {
         setCount(count + 1);
     }
@@ -27,14 +27,18 @@ const Home = () => {
 
     useEffect(() => {
         const loadTheme = async () => {
-            const storedTheme = await getItem("theme");
-            if (storedTheme !== null) {
-                setIsDarkModeEnabled(storedTheme === "true");
+            try {
+                const storedTheme = await getItem("theme");
+                if (storedTheme !== null) {
+                    setIsDarkModeEnabled(storedTheme === "true");
+                }
+            } catch (error) {
+                console.error("Error loading theme:", error);
             }
         }
         loadTheme();
     }, []);
-    
+
     return (
         <View style={[styles.counterContainer, { backgroundColor: isDarkModeEnabled ? '#646464' : '#fff' }]}>
             <Text style={[styles.counterTitle, { color: isDarkModeEnabled ? '#fff' : '#000' }]}>Counter Application</Text>
