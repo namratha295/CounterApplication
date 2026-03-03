@@ -31,15 +31,18 @@ This project focuses on strengthening fundamentals by building a clean, componen
 
 Component separation and reusability
 
-🏗️ Project Structure
+## 🏗️ Project Structure
+
+<pre>
 src/
  ├── screens/
- │     └── HomeScreen.tsx
+ │    └── HomeScreen.tsx
  ├── components/
- │     ├── CounterCard.tsx
- │     └── CounterButton.tsx
+ │    ├── CounterCard.tsx
+ │    └── CounterButton.tsx
  └── utils/
-       └── storage.ts
+      └── storage.ts
+</pre>
 
 🚀 How It Works
 
